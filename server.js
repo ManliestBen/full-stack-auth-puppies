@@ -8,10 +8,12 @@ require('./config/database');
 
 var puppiesRouter = require('./routes/api/puppies');
 
+
 app.use(logger('dev'));
 app.use(express.json());
 
 app.use('/api/puppies', puppiesRouter);
+app.use('/api/users', require('./routes/api/users'));
 
 app.listen(port, () => {
     console.log(`Express is listening on port ${port}.`)

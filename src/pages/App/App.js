@@ -7,10 +7,13 @@ import AddPuppyPage from '../../pages/AddPuppyPage/AddPuppyPage';
 import EditPuppyPage from '../../pages/EditPuppyPage/EditPuppyPage';
 import LoginPage from '../LoginPage/LoginPage';
 import SignupPage from '../SignupPage/SignupPage';
+import userService from '../../services/userService';
+import NavBar from '../../components/NavBar/NavBar';
 
 class App extends Component {
   state = {
-    puppies: []
+    puppies: [],
+    user: userService.getUser()
   };
 
   handleAddPuppy = async newPupData => {
@@ -37,7 +40,16 @@ class App extends Component {
       () => this.props.history.push('/')
     );
   }
-  
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({ user: null });
+  }
+
+  handleSignupOrLogin = () => {
+    this.setState({user: userService.getUser()});
+  }
+
   async componentDidMount() {
     const puppies = await puppyAPI.getAll();
     this.setState({puppies});
@@ -48,15 +60,10 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           React Puppies CRUD
-          <nav>
-            <NavLink exact to='/'>PUPPIES LIST</NavLink>
-            &nbsp;&nbsp;&nbsp;
-            <NavLink exact to='/add'>ADD PUPPY</NavLink>
-            &nbsp;&nbsp;&nbsp;
-            <NavLink to="/login" className='NavBar-link'>LOG IN</NavLink>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <NavLink to="/signup" className='NavBar-link'>SIGN UP</NavLink>
-          </nav>
+          <NavBar 
+            user={this.state.user}
+            handleLogout={this.handleLogout}
+          />
         </header>
         <main>
           <Route exact path='/' render={({history}) => 
@@ -79,13 +86,14 @@ class App extends Component {
           <Route exact path='/signup' render={({ history }) => 
             <SignupPage
               history={history}
-              
+              handleSignupOrLogin={this.handleSignupOrLogin}
             />
           }/>
-          <Route exact path='/login' render={() => 
+          <Route exact path='/login' render={({ history }) => 
             <LoginPage
-              
-            />
+            history={history}
+            handleSignupOrLogin={this.handleSignupOrLogin}
+          />
           }/>
         </main>
       </div>
