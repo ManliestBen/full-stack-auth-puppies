@@ -17,24 +17,26 @@ function PuppyCard({puppy, handleDeletePuppy, user}) {
                 </dl>
             </div>
             <div className='panel-footer'>
-                <Link
-                    className='btn btn-xs btn-warning'
-                    to={{
-                            pathname: '/edit',
-                            state: {puppy}
-                    }}
-                >
-                EDIT
-                </Link>
                 {puppy.owner === user._id ?
-                
+                    <Link
+                        className='btn btn-xs btn-warning'
+                        to={{
+                                pathname: '/edit',
+                                state: {puppy}
+                        }}
+                    >
+                    EDIT
+                    </Link>
+                    :
+                    <></>
+                }
+                {puppy.owner === user._id ?
                 <button
                     className='btn btn-xs btn-danger margin-left-10'
                     onClick={() => handleDeletePuppy(puppy._id)}
                 >
                     DELETE
                 </button>
-
                 :
                 <></>
                 }
