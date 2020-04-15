@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import userService from '../../services/userService';
 
-function PuppyCard({puppy, handleDeletePuppy}) {
+function PuppyCard({puppy, handleDeletePuppy, user}) {
     return (
         <div className='panel panel-default'>
             <div className="panel-heading">
@@ -25,12 +26,18 @@ function PuppyCard({puppy, handleDeletePuppy}) {
                 >
                 EDIT
                 </Link>
+                {puppy.owner === user._id ?
+                
                 <button
                     className='btn btn-xs btn-danger margin-left-10'
                     onClick={() => handleDeletePuppy(puppy._id)}
                 >
                     DELETE
                 </button>
+
+                :
+                <></>
+                }
             </div>
         </div>
     )

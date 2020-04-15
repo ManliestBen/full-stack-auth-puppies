@@ -11,6 +11,7 @@ function PuppyListPage(props) {
             <PuppyCard
                 key={puppy._id}
                 puppy={puppy}
+                user={props.user}
                 handleDeletePuppy={props.handleDeletePuppy}
             />
         )}

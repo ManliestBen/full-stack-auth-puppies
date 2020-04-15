@@ -70,6 +70,7 @@ class App extends Component {
             <PuppyListPage
               puppies={this.state.puppies}
               handleDeletePuppy={this.handleDeletePuppy}
+              user={this.state.user}
             />
           } />
           <Route exact path='/add' render={() => 
