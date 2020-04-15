@@ -5,6 +5,8 @@ import * as puppyAPI from '../../services/puppies-api';
 import PuppyListPage from '../../pages/PuppyListPage/PuppyListPage';
 import AddPuppyPage from '../../pages/AddPuppyPage/AddPuppyPage';
 import EditPuppyPage from '../../pages/EditPuppyPage/EditPuppyPage';
+import LoginPage from '../LoginPage/LoginPage';
+import SignupPage from '../SignupPage/SignupPage';
 
 class App extends Component {
   state = {
@@ -50,6 +52,10 @@ class App extends Component {
             <NavLink exact to='/'>PUPPIES LIST</NavLink>
             &nbsp;&nbsp;&nbsp;
             <NavLink exact to='/add'>ADD PUPPY</NavLink>
+            &nbsp;&nbsp;&nbsp;
+            <NavLink to="/login" className='NavBar-link'>LOG IN</NavLink>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <NavLink to="/signup" className='NavBar-link'>SIGN UP</NavLink>
           </nav>
         </header>
         <main>
@@ -70,6 +76,17 @@ class App extends Component {
               location={location}
             />
           } />
+          <Route exact path='/signup' render={({ history }) => 
+            <SignupPage
+              history={history}
+              
+            />
+          }/>
+          <Route exact path='/login' render={() => 
+            <LoginPage
+              
+            />
+          }/>
         </main>
       </div>
     )
