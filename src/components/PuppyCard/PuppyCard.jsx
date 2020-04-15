@@ -4,6 +4,7 @@ import userService from '../../services/userService';
 
 function PuppyCard({puppy, handleDeletePuppy, user}) {
     return (
+        
         <div className='panel panel-default'>
             <div className="panel-heading">
                 <h3 className='panel-title'>{puppy.name}</h3>
@@ -14,10 +15,11 @@ function PuppyCard({puppy, handleDeletePuppy, user}) {
                     <dd>{puppy.breed}</dd>
                     <dt>Age</dt>
                     <dd>{puppy.age}</dd>
+                    
                 </dl>
             </div>
             <div className='panel-footer'>
-                {puppy.owner === user._id ?
+                {puppy.owner === user._id  ?
                     <Link
                         className='btn btn-xs btn-warning'
                         to={{

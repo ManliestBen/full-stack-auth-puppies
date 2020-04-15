@@ -60,12 +60,15 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           React Puppies CRUD
+          
+          
           <NavBar 
             user={this.state.user}
             handleLogout={this.handleLogout}
           />
         </header>
         <main>
+          {this.state.user ? 
           <Route exact path='/' render={({history}) => 
             <PuppyListPage
               puppies={this.state.puppies}
@@ -73,6 +76,9 @@ class App extends Component {
               user={this.state.user}
             />
           } />
+          :
+          <></>
+        }
           <Route exact path='/add' render={() => 
             <AddPuppyPage
               handleAddPuppy = {this.handleAddPuppy}
