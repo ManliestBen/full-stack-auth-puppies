@@ -13,7 +13,8 @@ const puppySchema = new Schema({
     age: {
         type: Number,
         default: 0
-    }
+    },
+    owner: {type: Schema.Types.ObjectId, ref: "User"} 
 }, { timestamps: true }
 );
 

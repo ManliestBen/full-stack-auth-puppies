@@ -1,4 +1,5 @@
 const Puppy =require('../../models/puppy');
+const User = require('../../models/user');
 
 module.exports = {
     index,
@@ -43,6 +44,7 @@ async function index(req, res) {
 // }
 
 async function create(req, res) {
+    req.body.owner = req.user._id;
     const puppy = await Puppy.create(req.body);
     res.status(201).json(puppy);
 }
