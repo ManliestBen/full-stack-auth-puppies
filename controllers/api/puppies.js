@@ -45,6 +45,7 @@ async function index(req, res) {
 
 async function create(req, res) {
     req.body.owner = req.user._id;
+    req.body.ownerName = req.user.name;
     const puppy = await Puppy.create(req.body);
     res.status(201).json(puppy);
 }

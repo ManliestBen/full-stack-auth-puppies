@@ -15,6 +15,8 @@ function PuppyCard({puppy, handleDeletePuppy, user}) {
                     <dd>{puppy.breed}</dd>
                     <dt>Age</dt>
                     <dd>{puppy.age}</dd>
+                    <dt>Owner</dt>
+                    <dd>{puppy.ownerName}</dd>
                     
                 </dl>
             </div>
