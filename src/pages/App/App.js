@@ -9,10 +9,14 @@ import LoginPage from '../LoginPage/LoginPage';
 import SignupPage from '../SignupPage/SignupPage';
 import userService from '../../services/userService';
 import NavBar from '../../components/NavBar/NavBar';
+import CatListPage from '../CatListPage/CatListPage';
+import AddCatPage from '../AddCatPage/AddCatPage';
+import * as catAPI from '../../services/cats-api';
 
 class App extends Component {
   state = {
     puppies: [],
+    cats: [],
     user: userService.getUser()
   };
 
@@ -21,6 +25,13 @@ class App extends Component {
     this.setState(state => ({
       puppies: [...state.puppies, newPup]
     }), () => this.props.history.push('/'));
+  }
+
+  handleAddCat = async newCatData => {
+    const newCat = await catAPI.create(newCatData);
+    this.setState(state => ({
+      cats: [...state.cats, newCat]
+    }), () => this.props.history.push('/cats'));
   }
 
   handleDeletePuppy= async id => {
@@ -59,9 +70,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          React Puppies CRUD
-          
-          
+          CRUDdy Pets
           <NavBar 
             user={this.state.user}
             handleLogout={this.handleLogout}
@@ -78,10 +87,23 @@ class App extends Component {
           } />
           :
           <></>
-        }
+          }
+          <Route exact path='/cats' render={({history}) => 
+            <CatListPage
+            handleDeleteCat={this.handleDeleteCat}
+            cats={this.state.cats}
+            user={this.state.user}
+            history={history}
+            />
+          } />
           <Route exact path='/add' render={() => 
             <AddPuppyPage
               handleAddPuppy = {this.handleAddPuppy}
+            />
+          } />
+          <Route exact path='/addcat' render={() => 
+            <AddCatPage
+              handleAddCat = {this.handleAddCat}
             />
           } />
           <Route exact path='/edit' render={({history, location}) => 

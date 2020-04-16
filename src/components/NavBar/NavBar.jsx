@@ -6,9 +6,13 @@ import { NavLink } from 'react-router-dom';
 const NavBar = (props) => {
   let nav = props.user ?
     <>
-      <NavLink exact to='/'>PUPPIES LIST</NavLink>
+      <NavLink exact to='/cats'>CAT LIST</NavLink>
+      &nbsp;&nbsp;&nbsp;
+      <NavLink exact to='/'>PUPPY LIST</NavLink>
       &nbsp;&nbsp;&nbsp;
       <NavLink exact to='/add'>ADD PUPPY</NavLink>
+      &nbsp;&nbsp;&nbsp;
+      <NavLink exact to='/addcat'>ADD CAT</NavLink>
       &nbsp;&nbsp;&nbsp;
       <NavLink to=" " className='NavBar-link' onClick={props.handleLogout}>LOG OUT</NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;

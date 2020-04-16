@@ -6,13 +6,11 @@ const port = process.env.PORT || 3001;
 require('dotenv').config();
 require('./config/database');
 
-var puppiesRouter = require('./routes/api/puppies');
-
-
 app.use(logger('dev'));
 app.use(express.json());
 
-app.use('/api/puppies', puppiesRouter);
+app.use('/api/puppies', require('./routes/api/puppies'));
+app.use('/api/cats', require('./routes/api/cats'));
 app.use('/api/users', require('./routes/api/users'));
 
 app.listen(port, () => {

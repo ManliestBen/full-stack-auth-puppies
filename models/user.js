@@ -3,10 +3,30 @@ const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 6;
 
+const catSchema = new mongoose.Schema({
+  name: {
+      type: String,
+      required: true
+  },
+  breed: {
+      type: String,
+      default: "Mixed"
+  },
+  age: {
+      type: Number,
+      default: 0
+  },
+  owner: {
+      type: String
+  }
+}, { timestamps: true }
+);
+
 const userSchema = new mongoose.Schema({
   name: String,
   email: {type: String, required: true, lowercase: true, unique: true},
-  password: String
+  password: String,
+  cats: [catSchema]
 }, {
   timestamps: true
 });
