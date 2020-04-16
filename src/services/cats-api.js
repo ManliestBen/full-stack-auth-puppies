@@ -29,8 +29,8 @@ export function deleteOne(idx) {
   }, {mode: "cors"}).then(res => res.json());
 }
 
-export function update(cat) {
-  return fetch(`${BASE_URL}/${cat._id}`, {
+export function update(cat, idx) {
+  return fetch(`${BASE_URL}/${idx}`, {
     method: 'PUT',
     headers: {'content-type': 'application/json', 'Authorization': 'Bearer ' + tokenService.getToken()},
     body: JSON.stringify(cat)

@@ -12,6 +12,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import CatListPage from '../CatListPage/CatListPage';
 import AddCatPage from '../AddCatPage/AddCatPage';
 import * as catAPI from '../../services/cats-api';
+import EditCatPage from '../EditCatPage/EditCatPage';
 
 class App extends Component {
   state = {
@@ -32,6 +33,17 @@ class App extends Component {
     this.setState(state => ({
       cats: [...state.cats, newCat]
     }), () => this.props.history.push('/cats'));
+  }
+
+  handleUpdateCat = async (updatedCatData, idx, id) => {
+    const updatedCat = await catAPI.update(updatedCatData, idx);
+    const newCatsArray = this.state.cats.map(c =>
+        c._id === id ? updatedCat : c
+      );
+      this.setState(
+        {cats: newCatsArray},
+        () => this.props.history.push('/cats')
+      );
   }
 
   handleDeletePuppy= async id => {
@@ -64,6 +76,8 @@ class App extends Component {
   async componentDidMount() {
     const puppies = await puppyAPI.getAll();
     this.setState({puppies});
+    const cats = await catAPI.getAll();
+    this.setState({cats});
   }
 
   render() {
@@ -88,12 +102,12 @@ class App extends Component {
           :
           <></>
           }
-          <Route exact path='/cats' render={({history}) => 
+          <Route exact path='/cats' render={({history, location}) => 
             <CatListPage
-            handleDeleteCat={this.handleDeleteCat}
             cats={this.state.cats}
             user={this.state.user}
             history={history}
+            location={location}
             />
           } />
           <Route exact path='/add' render={() => 
@@ -109,6 +123,12 @@ class App extends Component {
           <Route exact path='/edit' render={({history, location}) => 
             <EditPuppyPage
               handleUpdatePuppy={this.handleUpdatePuppy}
+              location={location}
+            />
+          } />
+          <Route exact path='/editcat' render={({history, location}) => 
+            <EditCatPage
+              handleUpdateCat={this.handleUpdateCat}
               location={location}
             />
           } />

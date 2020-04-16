@@ -25,8 +25,9 @@ function CatCard({cat, handleDeleteCat, user, idx}) {
                     <Link
                         className='btn btn-xs btn-warning'
                         to={{
-                                pathname: '/edit',
-                                state: {cat}
+                                pathname: '/editcat',
+                                state: {cat},
+                                idx: idx
                         }}
                     >
                     EDIT

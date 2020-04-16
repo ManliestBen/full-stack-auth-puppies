@@ -21,14 +21,6 @@ class CatListPage extends Component {
         }), () => this.props.history.push('/cats'));
     }
 
-
-    // handleDeletePuppy= async id => {
-    //     await puppyAPI.deleteOne(id);
-    //     this.setState(state => ({
-    //       puppies: state.puppies.filter(p => p._id !== id)
-    //     }), () => this.props.history.push('/'));
-    // }
-
     render() {
         return (
             <>

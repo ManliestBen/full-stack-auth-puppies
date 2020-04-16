@@ -3,7 +3,8 @@ const User =require('../../models/user');
 module.exports = {
   index,
   create,
-  delete: deleteOne
+  delete: deleteOne,
+  update
 };
 
 
@@ -26,5 +27,13 @@ async function deleteOne(req, res) {
     let deletedCat = user.cats.splice(req.params.idx, 1);
     user.save(function(err) {
         res.status(200).json(deletedCat);
+    })
+}
+
+async function update(req, res) {
+    const user = await User.findById(req.user._id);
+    let catToUpdate = user.cats.splice(req.params.idx, 1, req.body);
+    user.save(function(err) {
+        res.status(200).json(user.cats[req.params.idx])
     })
 }
