@@ -5,8 +5,20 @@ const SECRET = process.env.SECRET;
 
 module.exports = {
   signup,
-  login
+  login,
+  index,
+  show
 };
+
+async function index(req, res) {
+  const users = await User.find({});
+  res.status(200).json(users);
+}
+
+async function show(req, res) {
+  const user = await User.findById(req.params.id);
+  res.status(200).json(user);
+}
 
 async function signup(req, res) {
   const user = new User(req.body);

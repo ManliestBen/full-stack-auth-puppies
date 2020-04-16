@@ -13,6 +13,7 @@ import CatListPage from '../CatListPage/CatListPage';
 import AddCatPage from '../AddCatPage/AddCatPage';
 import * as catAPI from '../../services/cats-api';
 import EditCatPage from '../EditCatPage/EditCatPage';
+import UserListPage from '../UserListPage/UserListPage';
 
 class App extends Component {
   state = {
@@ -113,6 +114,11 @@ class App extends Component {
           <Route exact path='/add' render={() => 
             <AddPuppyPage
               handleAddPuppy = {this.handleAddPuppy}
+            />
+          } />
+          <Route exact path='/users' render={({history}) => 
+            <UserListPage
+              history={history}
             />
           } />
           <Route exact path='/addcat' render={() => 

@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 const NavBar = (props) => {
   let nav = props.user ?
     <>
+      <NavLink exact to='/users'>USERS</NavLink>
+      &nbsp;&nbsp;&nbsp;
       <NavLink exact to='/cats'>CAT LIST</NavLink>
       &nbsp;&nbsp;&nbsp;
       <NavLink exact to='/'>PUPPY LIST</NavLink>
